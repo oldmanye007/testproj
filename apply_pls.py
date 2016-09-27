@@ -17,11 +17,6 @@ except:
 
 from gdalconst import *
 
-def ap(aa):
-  """
-    test for apply_pls.py
-  """ 
-  import apply_pls.py
 
 def gdaltype2nptype(gdalDataType):
   """
