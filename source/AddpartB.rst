@@ -34,9 +34,6 @@ Usage
 
   # ccccc
   # ccc
-  
-  .. math::
-    f(x) = \frac{a}{c}  a^2
 
 usage: 
 
@@ -53,11 +50,66 @@ optional arguments:
 
   -o OUTDIR, --outdir OUTDIR  Output dir
 
+  -d OUTDIR, --outdir OUTDIR  Output dir
+
+  -ss  cc aa bb
+
+  simple table 
+
+  -aa   bb
+
+  -cc   dd
+  
+  simple table2   
+
+    -sw   cc   aa sb 
+
+    -sw   cc aa   sb inline Eq :math:`a^2 + b^2 = c^2`
+
+    -ss   cc aa bb   nn
+
+    -ss   cc aa bb nn
+
+  grid table
+
+  :math:`a^2 + b^2 = c^2`
+  
+  grid table
+
+  =====  =====  =======
+    A      B    A and B
+  =====  =====  =======
+  False  False  False
+  True   False  False
+  False  True   False
+  True   True   True
+  =====  =====  =======
+
+
 cloud masking
 --------------
 
+  ``dedef``
+
 *drmvgbmbhmhnmmnjnmjmn*
 
+.. image::./ownimg/f130612_flightline.png
+    :scale: 50%
+    :align: center
+    :alt: alternate text
+
+.. math:: 
+  :nowrap:
+
+  \begin{align}
+    y    & =  ax^2+bx+c \\
+    f(x) & =  x^2+2xy+y^2
+  \end{align}
+
+  \begin{align*}
+    y    & = ax^2 +bx + c \\
+    f(x) & = x^2 +2xy + y^2
+  \end{align*}
 
 Example
 -------
@@ -69,7 +121,7 @@ Library
 
 .. code-block:: python
   :linenos:
-  :dedent: 4
+  :dedent: 0
 
   import numpy as np
   def get_envi_header_dict(hdr):
