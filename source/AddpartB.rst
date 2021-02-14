@@ -34,6 +34,9 @@ Usage
 
   # ccccc
   # ccc
+  
+  .. math::
+    f(x) = \frac{a}{c}
 
 usage: 
 
@@ -66,6 +69,7 @@ Library
 
 .. code-block:: python
   :linenos:
+  :dedent: 4
 
   import numpy as np
   def get_envi_header_dict(hdr):
