@@ -36,7 +36,7 @@ Usage
   # ccc
   
   .. math::
-    f(x) = \frac{a}{c}
+    f(x) = \frac{a}{c}  a^2
 
 usage: 
 
