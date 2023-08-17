@@ -163,7 +163,7 @@ def shd_mask(in_ds, bad_mask, bkgMask, kernel,inimg,totalnband,gdaltype, interle
   rBand=np.random.randn(in_ds.RasterYSize,in_ds.RasterXSize)
   thres=3
   rand_count=len(rBand[(rBand>thres) & (bad_mask>0)])
-  print rand_count  
+  print(rand_count) 
 
   y_ind=np.where((rBand>thres) & (bad_mask>0))[0]
   x_ind=np.where((rBand>thres) & (bad_mask>0))[1]
@@ -226,7 +226,7 @@ def cld_mask(in_ds ,bad_mask,shdBand,inimg, totalnband, gdaltype, interleave):
   
   iPos=[152,168]#[106, 112, 152, 153, 167, 168, 169]#[106, 107, 108, 109, 110, 111, 112, 152, 153, 167, 168, 169]#1.353, 1.4129, 1.8115, 1.8214, 1.9373~1.9573
   nbb=len(iPos)#7
-  print iPos, nbb
+  print(iPos, nbb)
   iEnd=np.zeros(nbb)#(4)#(8)
   
   if interleave=='bip':
@@ -258,13 +258,13 @@ def cld_mask(in_ds ,bad_mask,shdBand,inimg, totalnband, gdaltype, interleave):
  
     iBand = sig.convolve(iBand,kernel5, mode = 'same')  #mean filter
     wrtArr[:,:,i]=iBand
-  print iEnd
+  print(iEnd)
   #sys.exit(0)
   
   rBand=np.random.randn(in_ds.RasterYSize,in_ds.RasterXSize)
   thres=3
   rand_count=len(rBand[(rBand>thres) & (bad_mask>0)])
-  print rand_count
+  print(rand_count)
 
   y_ind=np.where((rBand>thres) & (bad_mask>0))[0]
   x_ind=np.where((rBand>thres) & (bad_mask>0))[1]
@@ -312,7 +312,7 @@ def cld_mask(in_ds ,bad_mask,shdBand,inimg, totalnband, gdaltype, interleave):
   gt0_MaxH=np.amax(gt0_Hist)
   gt0_MaxI=np.argmax(gt0_Hist)
   
-  print gt0_MaxH,gt0_MaxI
+  print(gt0_MaxH,gt0_MaxI)
   
   #SET UP CONDITION WHEN THE MAX OCCURS RIGHT AT THE START OF THE HISTOGRAM
   if (gt0_MaxI > 0):
@@ -332,7 +332,7 @@ def cld_mask(in_ds ,bad_mask,shdBand,inimg, totalnband, gdaltype, interleave):
     # Calculate mean, sd
     nMean=np.sum(nHist*iLocs)/np.sum(nHist)
     nStdv=np.sqrt(np.sum(nHist*(np.square(iLocs-nMean)))/np.sum(nHist))  
-    print nMean,nStdv
+    print(nMean,nStdv)
     # Calculate zScore
     zScore=(cldBand-nMean)/nStdv
 
@@ -358,7 +358,7 @@ def do_masking(inimg, outimg, outdir, intBN):
   in_ds=gdal.Open(inimg, GA_ReadOnly)
 
   if in_ds is None:
-    print 'Could not open ' + inimg
+    print('Could not open ' + inimg)
     sys.exit(1)
   try:
     #with open (inimg+".hdr", "r") as hdrfile1:
@@ -368,7 +368,7 @@ def do_masking(inimg, outimg, outdir, intBN):
 
     
     if (os.path.exists(outimg)):
-      print "File exists!"
+      print("File exists!")
       in_ds=None   
       sys.exit(1)	 
 
@@ -451,12 +451,12 @@ def do_masking(inimg, outimg, outdir, intBN):
       hdrinfo.write_header(outdir, intBN+"_CSM.hdr")      
 	  
   except RuntimeError, e:
-    print e
+    print(e)
     sys.exit(1)
 
   in_ds=None
   
-  print 'PROCESS COMPLETE'
+  print('PROCESS COMPLETE')
   
   
 def main(argv):
@@ -479,7 +479,7 @@ def main(argv):
    outdir=args.outdir
    outimg=outdir+'/'+intBN+'_CSM.img'
 
-   print intBN, outimg
+   print(intBN, outimg)
 
    do_masking(inimg, outimg, outdir, intBN)
 	  
