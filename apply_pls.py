@@ -12,7 +12,7 @@ except:
     try:
         from osgeo import gdal
     except:
-        print "Import of gdal failed."
+        print("Import of gdal failed.")
         sys.exit(1)
 
 from gdalconst import *
@@ -65,7 +65,7 @@ def read_csv_coef(incsv):
     r = csv.reader(csvfile)
     #print csvfile.fieldnames
     header = r.next()
-    print 'csv header',header,
+    print('csv header',header)
     num_col=len(header)
     r.next()
     #csvfile.seek(0)
@@ -94,13 +94,13 @@ def cal_pls_y(inimg,outdir, csvdata):
   
   if os.path.exists(inimg+".hdr"):
     hdrinfo=EHH.ENVI_Header(inimg+".hdr")
-    print inimg+".hdr"
+    print(inimg+".hdr")
   else:
     if os.path.exists(os.path.splitext(inimg)[0]+".hdr"):
       hdrinfo=EHH.ENVI_Header(os.path.splitext(inimg)[0]+".hdr")
-      print os.path.splitext(inimg)[0]+".hdr"
+      print(os.path.splitext(inimg)[0]+".hdr")
     else:
-      print "Cannot find .hdr file"
+      print("Cannot find .hdr file")
       sys.exit(1)
   
   nband=int(hdrinfo.get_value('bands'))
@@ -111,12 +111,12 @@ def cal_pls_y(inimg,outdir, csvdata):
   in_ds=gdal.Open(inimg, GA_ReadOnly)
 
   if in_ds is None:
-    print 'Could not open ' + inimg
+    print('Could not open ' + inimg)
     sys.exit(1)
   try: 
      
     if (os.path.exists(outimg)):
-      print "File exists!"
+      print("File exists!")
       in_ds=None   
       sys.exit(1)
 
@@ -138,16 +138,16 @@ def cal_pls_y(inimg,outdir, csvdata):
     coef_matrix=np.reshape(coef_matrix,(total_band,len(csvdata["spec_name"])))
     
     
-    print coef_matrix.shape
-    print intercept_list
+    print(coef_matrix.shape)
+    print(intercept_list)
     #sys.exit(1)
     with open(outimg, 'ab') as f:
 
       if m_interleave=='bsq':
-        print m_interleave    
+        print(m_interleave)   
         i_spec=0
         for species in csvdata["spec_name"]:
-          print species
+          print(species)
           
           #sumband=np.ones((in_ds.RasterYSize * in_ds.RasterXSize),np.float)
           sumband=np.zeros((in_ds.RasterYSize * in_ds.RasterXSize),np.float)
@@ -198,7 +198,7 @@ def cal_pls_y(inimg,outdir, csvdata):
       hdrinfo.write_header(outdir, outimg+".hdr")
        
   except RuntimeError, e:
-    print e
+    print(e)
     in_ds=None 
     sys.exit(1)  
   
@@ -227,9 +227,9 @@ def main(argv):
   outdir=args.outdir
   
   csvdata=read_csv_coef(coefcsv)  # include intercepts
-  print csvdata["spec_name"]
-  print csvdata["data"].shape
-  print csvdata["bandlist"][0:10]  #band number starts from 1
+  print(csvdata["spec_name"])
+  print(csvdata["data"].shape)
+  print(csvdata["bandlist"][0:10])  #band number starts from 1
 
   cal_pls_y(inimg,outdir, csvdata)
 
